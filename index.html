@@ -1,0 +1,442 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>swordfight.io</title>
+    <link rel="icon" href="./img/logo/logo.webp" type="image/webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      overflow: hidden;
+    }
+    select {
+      outline: none;
+      border-radius: 5px;
+    }
+    .montserrat700 {
+      font-family: "montserrat";
+      font-weight: 700;
+      color: white;
+    }
+    .imgBtn {
+      cursor: pointer;
+      margin-top: 8px;
+      margin-left: 2px;
+      border-radius: 8px;
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+    #discordLogo {
+      margin-left: 8px !important;
+      border: 5px solid #2f4f81;
+    }
+    #codeLogo {
+      border: 5px solid #8f2b49;
+    }
+    #kofiLogo {
+      border: 5px solid #8c4920;
+    }
+    #canvas {
+      position: absolute;
+    }
+    #minimapCanvas {
+      position: absolute;
+    }
+    #menu {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+    }
+    #mainMenu {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+    #swordfightText {
+      font-size: 5.5rem;
+    }
+    #modeRegionFlex {
+      margin-top: 0.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 40rem;
+      height: 4.1rem;
+      gap: 0.7rem;
+    }
+    #modeRegionText {
+      font-size: 1.35rem;
+    }
+    #modeSelect {
+      background: linear-gradient(to bottom, #4caf50 70%, #388e3c 30%);
+      border: 2px solid #2e7d32;
+      color: white;
+      font-family: "montserrat";
+      font-weight: 700;
+      padding-left: 0.8rem;
+      font-size: 1.6rem;
+      cursor: pointer;
+      width: 100%;
+      height: 4.1rem;
+    }
+    #regionSelect {
+      background: linear-gradient(to bottom, #2196f3 70%, #1976d2 30%);
+      border: 2px solid #0d47a1;
+      color: white;
+      font-family: "montserrat";
+      font-weight: 700;
+      padding-left: 0.8rem;
+      font-size: 1.6rem;
+      cursor: pointer;
+      width: 100%;
+      height: 4.1rem;
+    }
+    #nameInput {
+      /* margin top +0.8 rem to fix it */
+      margin-top: 1.5rem;
+      width: 40rem;
+      height: 4.1rem;
+      background-color: white;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      color: black;
+      border: 2px solid gray;
+      font-family: "montserrat";
+      font-weight: 700;
+      font-size: 1.6rem;
+      padding-left: 0.8rem;
+    }
+    #nameInput::placeholder {
+      color: gray;
+      opacity: 0.7;
+    }
+    #playButton {
+      margin-top: 0.7rem;
+      width: 24rem;
+      height: 4.1rem;
+      background: linear-gradient(to bottom, #ff9800 70%, #f57c20 30%);
+      border: 2px solid #e65100;
+      color: white;
+      font-family: "montserrat";
+      font-weight: 700;
+      font-size: 1.6rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #mode,
+    #region {
+      flex: 1;
+    }
+    #chatInput {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid black;
+      border-radius: 15px;
+      font-family: "Montserrat";
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: white;
+      padding: 1rem;
+      outline: none;
+    }
+    #chatInput::placeholder {
+      color: white;
+    }
+    #popupGuideImg {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      border-bottom: 2px solid rgb(200, 0, 0);
+      border-left: 2px solid rgb(200, 0, 0);
+      border-right: 2px solid rgb(200, 0, 0);
+      z-index: 100;
+    }
+    /* shop ui */
+    #shopBg {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.4);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 70%;
+      font-family: "Montserrat";
+      color: white;
+      user-select: none;
+      z-index: 69;
+    }
+    #shopExitCross {
+      position: absolute;
+      font-size: 3.5rem;
+      top: 1%;
+      right: 1%;
+    }
+    #shopMainText {
+      position: absolute;
+      font-size: 4rem;
+      font-weight: bold;
+      transform: translate(-50%);
+      top: 0%;
+      left: 50%;
+    }
+    #selectContainer {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+    .selectText {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+    #shopSelectSwordsContainer,
+    #shopSelectHelmetsContainer,
+    #shopSelectSpikesContainer {
+      display: flex;
+      justify-content: flex-start;
+      gap: 0.3rem;
+    }
+    .shopSelect {
+      color: #1f1f1f;
+      background-color: #ffffff;
+      border: 0.3rem solid #cfcfcf;
+      padding: 0.5rem 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      appearance: none;
+      outline: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .shopSelectBuyBtn {
+      color: #ffffff;
+      background-color: #4caf50;
+      border: 0.3rem solid #388e3c;
+      padding: 0.5rem 0.75rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      appearance: none;
+      outline: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .shopSelectSellBtn {
+      color: #ffffff;
+      background-color: #f44336;
+      border: 0.3rem solid #d32f2f;
+      padding: 0.5rem 0.75rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      appearance: none;
+      outline: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .shopSliderContainer {
+      width: 100%;
+    }
+    #shopSlider {
+      appearance: none;
+      width: 100%;
+      height: 1.2rem;
+      border-radius: 0.4rem;
+      outline: none;
+    }
+    #shopSlider::-webkit-slider-thumb {
+      appearance: none;
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 50%;
+      background: #04aa6d;
+      cursor: pointer;
+    }
+    #shopSlider::-moz-range-thumb {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 50%;
+      background: #04aa6d;
+      cursor: pointer;
+    }
+    .aAppearanceNone {
+      appearance: none;
+      text-decoration: none;
+    }
+    /* supported width: 3840 - 320px */
+    /* mobile width 768px */
+    @media (max-width: 768px) {
+      #swordfightText {
+        font-size: 3.8rem;
+      }
+      #modeRegionFlex {
+        width: 26rem;
+      }
+      #nameInput {
+        width: 26rem;
+      }
+      #playButton {
+        width: 16rem;
+      }
+      #modeRegionText {
+        font-size: 1.2rem;
+      }
+      .imgBtn {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+    /* mobile width 536px */
+    @media (max-width: 536px) {
+      #swordfightText {
+        font-size: 3.2rem;
+      }
+      #modeRegionFlex {
+        width: 22rem;
+      }
+      #nameInput {
+        width: 22rem;
+      }
+      #playButton {
+        width: 13rem;
+      }
+      #modeRegionText {
+        font-size: 1.1rem;
+      }
+      .imgBtn {
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+    }
+    /* mobile width 442px */
+    @media (max-width: 442px) {
+      #swordfightText {
+        font-size: 2.6rem;
+      }
+      #modeRegionFlex {
+        width: 18rem;
+      }
+      #nameInput {
+        width: 18rem;
+      }
+      #playButton {
+        width: 10rem;
+      }
+      #modeRegionText {
+        font-size: 1rem;
+      }
+      .imgBtn {
+        width: 2.7rem;
+        height: 2.7rem;
+      }
+    }
+    /* mobile width 362px */
+    @media (max-width: 362px) {
+      #swordfightText {
+        font-size: 2.3rem;
+      }
+      #modeRegionFlex {
+        width: 16rem;
+      }
+      #nameInput {
+        width: 16rem;
+      }
+      #playButton {
+        width: 9rem;
+      }
+      #modeRegionText {
+        font-size: 0.9rem;
+      }
+      .imgBtn {
+        width: 2.6rem;
+        height: 2.6rem;
+      }
+    }
+  </style>
+  <body>
+    <script src="script.js"></script>
+    <img id="popupGuideImg" src="./img/popupGuide/popupGuide.webp" />
+    <div id="shopBg">
+      <div id="shopMainText">SHOP</div>
+      <div id="shopExitCross">&#10006;</div>
+      <div id="selectContainer">
+        <div id="numberOfItemsText" class="selectText"></div>
+        <div class="shopSliderContainer">
+          <input type="range" min="1" max="10" value="1" id="shopSlider" />
+        </div>
+        <div class="selectText">HELMETS (BUY/SELL)</div>
+        <div id="shopSelectHelmetsContainer">
+          <select class="shopSelect" id="shopHelmetsSelect"></select>
+          <div id="sellHelmets" class="shopSelectSellBtn">SELL</div>
+          <div id="buyHelmets" class="shopSelectBuyBtn">BUY</div>
+        </div>
+        <div class="selectText">SWORDS (BUY/SELL)</div>
+        <div id="shopSelectSwordsContainer">
+          <select class="shopSelect" id="shopSwordsSelect"></select>
+          <div id="sellSwords" class="shopSelectSellBtn">SELL</div>
+          <div id="buySwords" class="shopSelectBuyBtn">BUY</div>
+        </div>
+        <div class="selectText">SPIKES (BUY/SELL)</div>
+        <div id="shopSelectSpikesContainer">
+          <select class="shopSelect" id="shopSpikesSelect"></select>
+          <div id="sellSpikes" class="shopSelectSellBtn">SELL</div>
+          <div id="buySpikes" class="shopSelectBuyBtn">BUY</div>
+        </div>
+      </div>
+    </div>
+    <div id="menu" class="montserrat700">
+      <div id="topBtns">
+        <a class="aAppearanceNone" href="https://discord.com/invite/mvfEDGr2RZ" target="_blank">
+          <img id="discordLogo" class="imgBtn" src="./img/logo/discordLogo.webp" draggable="false" />
+        </a>
+        <a class="aAppearanceNone" href="https://github.com/Leetdevs?tab=repositories" target="_blank">
+          <img id="codeLogo" class="imgBtn" src="./img/logo/codeLogo.webp" draggable="false" />
+        </a>
+        <a class="aAppearanceNone" href="https://ko-fi.com/leetdev" target="_blank">
+          <img id="kofiLogo" class="imgBtn" src="./img/logo/kofiLogo.webp" draggable="false" />
+        </a>
+      </div>
+      <div id="mainMenu">
+        <div id="swordfightText">SWORDFIGHT</div>
+        <div id="modeRegionFlex">
+          <div id="mode">
+            <label id="modeRegionText">Game Mode <br /></label>
+            <select id="modeSelect">
+              <option value="desktop">FFA</option>
+            </select>
+          </div>
+          <div id="region">
+            <label id="modeRegionText">Region <br /></label>
+            <select id="regionSelect">
+              <option value="desktop">Germany</option>
+            </select>
+          </div>
+        </div>
+        <input type="text" id="nameInput" placeholder="This is the tale of..." autocomplete="off" maxlength="10" />
+        <button id="playButton">Play</button>
+      </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <canvas id="minimapCanvas"></canvas>
+    <input type="text" id="chatInput" placeholder="Enter Message..." autocomplete="off" maxlength="50" />
+  </body>
+</html>
