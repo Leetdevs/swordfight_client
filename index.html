@@ -13,12 +13,31 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: black;
+      background: radial-gradient(ellipse at center, #252525 0%, #000000 100%);
+      background-size: 200% 200%;
+      animation: backgroundPulse 20s ease infinite;
       overflow: hidden;
+    }
+    @keyframes backgroundPulse {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
     }
     select {
       outline: none;
       border-radius: 5px;
+    }
+    :root {
+      --popupGuide-primary: #ffffff;
+      --popupGuide-secondary: #a0a0a0;
+      --popupGuide-accent: #00ff9d;
+      --popupGuide-surface: #1e1e1e;
     }
     .montserrat700 {
       font-family: "montserrat";
@@ -26,22 +45,38 @@
       color: white;
     }
     .imgBtn {
+      box-sizing: border-box;
       cursor: pointer;
       margin-top: 8px;
       margin-left: 2px;
       border-radius: 8px;
       width: 3.2rem;
       height: 3.2rem;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .imgBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
     }
     #discordLogo {
-      margin-left: 8px !important;
+      margin-left: 0.5rem;
       border: 5px solid #2f4f81;
+    }
+    #discordLogo:hover {
+      border-color: #3c5aa6;
     }
     #codeLogo {
       border: 5px solid #8f2b49;
     }
+    #codeLogo:hover {
+      border-color: #a0365d;
+    }
     #kofiLogo {
       border: 5px solid #8c4920;
+    }
+    #kofiLogo:hover {
+      border-color: #a15d34;
     }
     #canvas {
       position: absolute;
@@ -61,13 +96,20 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-bottom: 1.5rem;
+      padding: 2.5rem 3rem;
       transform: translate(-50%, -50%);
       top: 50%;
       left: 50%;
+      background: linear-gradient(145deg, #1e1e1e, #161616);
+      border: 1px solid #333333;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     }
     #swordfightText {
       font-size: 5.5rem;
+      color: var(--popupGuide-accent);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
     }
     #modeRegionFlex {
       margin-top: 0.1rem;
@@ -80,23 +122,17 @@
     }
     #modeRegionText {
       font-size: 1.35rem;
+      color: var(--popupGuide-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+      text-align: center;
     }
-    #modeSelect {
-      background: linear-gradient(to bottom, #4caf50 70%, #388e3c 30%);
-      border: 2px solid #2e7d32;
-      color: white;
-      font-family: "montserrat";
-      font-weight: 700;
-      padding-left: 0.8rem;
-      font-size: 1.6rem;
-      cursor: pointer;
-      width: 100%;
-      height: 4.1rem;
-    }
+    #modeSelect,
     #regionSelect {
-      background: linear-gradient(to bottom, #2196f3 70%, #1976d2 30%);
-      border: 2px solid #0d47a1;
-      color: white;
+      background: var(--popupGuide-surface);
+      border: 1px solid #333333;
+      color: var(--popupGuide-primary);
       font-family: "montserrat";
       font-weight: 700;
       padding-left: 0.8rem;
@@ -104,39 +140,55 @@
       cursor: pointer;
       width: 100%;
       height: 4.1rem;
+      border-radius: 8px;
+      transition: border 0.2s ease, background 0.2s ease;
+    }
+    #modeSelect:hover,
+    #regionSelect:hover {
+      background: #191919;
+      border-color: var(--popupGuide-accent);
     }
     #nameInput {
-      /* margin top +0.8 rem to fix it */
       margin-top: 1.5rem;
       width: 40rem;
       height: 4.1rem;
-      background-color: white;
-      border: none;
+      background-color: var(--popupGuide-surface);
+      border: 1px solid #333333;
       outline: none;
-      border-radius: 5px;
-      color: black;
-      border: 2px solid gray;
+      border-radius: 8px;
+      color: var(--popupGuide-primary);
       font-family: "montserrat";
       font-weight: 700;
       font-size: 1.6rem;
       padding-left: 0.8rem;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+    #nameInput:hover {
+      border-color: var(--popupGuide-accent);
+      box-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
     }
     #nameInput::placeholder {
-      color: gray;
+      color: var(--popupGuide-secondary);
       opacity: 0.7;
     }
     #playButton {
       margin-top: 0.7rem;
       width: 24rem;
       height: 4.1rem;
-      background: linear-gradient(to bottom, #ff9800 70%, #f57c20 30%);
-      border: 2px solid #e65100;
-      color: white;
+      background: var(--popupGuide-accent);
+      border: 1px solid #333333;
+      color: var(--popupGuide-primary);
       font-family: "montserrat";
       font-weight: 700;
       font-size: 1.6rem;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    #playButton:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     }
     #mode,
     #region {
@@ -148,9 +200,9 @@
       top: 50%;
       left: 50%;
       background-color: rgba(0, 0, 0, 0.5);
-      border: 1px solid black;
-      border-radius: 15px;
-      font-family: "Montserrat";
+      border: 2px solid black;
+      border-radius: 10px;
+      font-family: "Montserrat", sans-serif;
       font-weight: bold;
       font-size: 1.1rem;
       color: white;
@@ -159,17 +211,6 @@
     }
     #chatInput::placeholder {
       color: white;
-    }
-    #popupGuideImg {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      border-bottom: 2px solid rgb(200, 0, 0);
-      border-left: 2px solid rgb(200, 0, 0);
-      border-right: 2px solid rgb(200, 0, 0);
-      z-index: 100;
     }
     /* shop ui */
     #shopBg {
@@ -448,13 +489,10 @@
         font-size: 0.9rem;
       }
     }
-    /* shop end */
     .aAppearanceNone {
       appearance: none;
       text-decoration: none;
     }
-    /* supported width: 3840 - 320px */
-    /* mobile width 768px */
     @media (max-width: 768px) {
       #swordfightText {
         font-size: 3.8rem;
@@ -476,7 +514,6 @@
         height: 3rem;
       }
     }
-    /* mobile width 536px */
     @media (max-width: 536px) {
       #swordfightText {
         font-size: 3.2rem;
@@ -498,7 +535,6 @@
         height: 2.8rem;
       }
     }
-    /* mobile width 442px */
     @media (max-width: 442px) {
       #swordfightText {
         font-size: 2.6rem;
@@ -520,7 +556,6 @@
         height: 2.7rem;
       }
     }
-    /* mobile width 362px */
     @media (max-width: 362px) {
       #swordfightText {
         font-size: 2.3rem;
@@ -542,10 +577,187 @@
         height: 2.6rem;
       }
     }
+    /* popup guide */
+    .popupGuide-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--popupGuide-surface);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      max-width: 640px;
+      width: 90%;
+      color: var(--popupGuide-primary);
+      border: 1px solid #333333;
+      margin: 20px;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+    .popupGuide-popup * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Montserrat", sans-serif;
+    }
+    .popupGuide-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--popupGuide-accent);
+    }
+    .popupGuide-section {
+      margin-bottom: 2rem;
+    }
+    .popupGuide-sectionTitle {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--popupGuide-accent);
+      letter-spacing: 0.3px;
+    }
+    .popupGuide-gridContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .popupGuide-keybindItem {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: #292929;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+    .popupGuide-keybindItem:hover {
+      transform: translateY(-2px);
+    }
+    .popupGuide-key {
+      color: var(--popupGuide-accent);
+      font-weight: 600;
+    }
+    .popupGuide-infoText {
+      line-height: 1.6;
+      color: var(--popupGuide-secondary);
+      padding: 1rem;
+      background: #292929;
+      border-radius: 8px;
+      font-weight: 500;
+      border-left: 3px solid var(--popupGuide-accent);
+    }
+    .popupGuide-infoText strong {
+      color: var(--popupGuide-accent);
+    }
+    .popupGuide-continueText {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--popupGuide-secondary);
+      animation: popupGuide-pulse 1.8s infinite;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    @keyframes popupGuide-pulse {
+      0%,
+      100% {
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 0.4;
+      }
+    }
+    @media (max-width: 480px) {
+      .popupGuide-popup {
+        padding: 1.8rem;
+      }
+      .popupGuide-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+      }
+      .popupGuide-keybindItem {
+        padding: 0.6rem;
+      }
+      .popupGuide-infoText {
+        font-size: 0.9rem;
+      }
+    }
   </style>
   <body>
+    <script>
+      // popupGuide v2
+      (function () {
+        document.addEventListener("DOMContentLoaded", (event) => {
+          var popup = document.getElementById("popupGuide-popup");
+          var dismissPopup = function () {
+            popup.style.opacity = "0";
+            popup.style.transform = "translate(-50%, calc(-50% - 20px))";
+            setTimeout(function () {
+              if (popup && popup.parentNode) {
+                popup.parentNode.removeChild(popup);
+                // show main menu after user pressed any key to continue
+                document.getElementById("mainMenu").style.display = "";
+              }
+            }, 300);
+            document.removeEventListener("keydown", keydownHandler);
+            popup.removeEventListener("click", clickHandler);
+          };
+          var keydownHandler = function () {
+            dismissPopup();
+          };
+          var clickHandler = function () {
+            dismissPopup();
+          };
+          document.addEventListener("keydown", keydownHandler);
+          popup.addEventListener("click", clickHandler);
+        });
+      })();
+    </script>
+    <div class="popupGuide-popup" id="popupGuide-popup">
+      <h1 class="popupGuide-title">Welcome to Swordfight</h1>
+      <div class="popupGuide-section">
+        <div class="popupGuide-sectionTitle">Keybinds</div>
+        <div class="popupGuide-gridContainer">
+          <div class="popupGuide-keybindItem">
+            <span>Shop</span>
+            <span class="popupGuide-key">Shift</span>
+          </div>
+          <div class="popupGuide-keybindItem">
+            <span>Chat</span>
+            <span class="popupGuide-key">Enter</span>
+          </div>
+          <div class="popupGuide-keybindItem">
+            <span>Movement</span>
+            <span class="popupGuide-key">WASD</span>
+          </div>
+          <div class="popupGuide-keybindItem">
+            <span>Build</span>
+            <span class="popupGuide-key">Space</span>
+          </div>
+          <div class="popupGuide-keybindItem">
+            <span>Attack</span>
+            <span class="popupGuide-key">Click</span>
+          </div>
+        </div>
+      </div>
+      <div class="popupGuide-section">
+        <div class="popupGuide-sectionTitle">Rarities</div>
+        <div class="popupGuide-infoText">
+          5-tier rarity system starting from <strong>Stone (Level 1)</strong> up to
+          <strong>Netherite (Level 5)</strong>
+        </div>
+      </div>
+      <div class="popupGuide-section">
+        <div class="popupGuide-sectionTitle">Shop System</div>
+        <div class="popupGuide-infoText">Press <strong>Shift</strong> to access the shop where you can spend your earned points to purchase various items and upgrades. Manage your inventory and transactions with 0% fees.</div>
+      </div>
+      <div class="popupGuide-continueText">PRESS ANY KEY TO CONTINUE</div>
+    </div>
+
     <script src="script.js"></script>
-    <img id="popupGuideImg" src="./img/popupGuide/popupGuide.webp" />
     <div id="shopBg">
       <div id="shopMainText">SHOP</div>
       <div id="shopExitCross">&#10006;</div>
